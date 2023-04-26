@@ -38,7 +38,7 @@ int _myexit(info_t *info)
 int _mycd(info_t *info)
 {
 	char *s, *dir, buffer[1024];
-	int chdir;
+	int chdir_ret;
 
 	s = getcwd(buffer, 1024);
 	if (!s)
@@ -47,10 +47,10 @@ int _mycd(info_t *info)
 	{
 		dir = _getenv(info, "HOME=");
 		if (!dir)
-			chdir = /* TODO: what should this be? */
+			chdir_ret = /* TODO: what should this be? */
 				chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
 		else
-			chdir = chdir(dir);
+			chdir_ret = chdir(dir);
 	}
 	else if (_strcmp(info->argv[1], "-") == 0)
 	{
@@ -61,12 +61,12 @@ int _mycd(info_t *info)
 			return (1);
 		}
 		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
-		chdir = /* TODO: what should this be? */
+		chdir_ret = /* TODO: what should this be? */
 			chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
-		chdir = chdir(info->argv[1]);
-	if (chdir == -1)
+		chdir_ret = chdir(info->argv[1]);
+	if (chdir_ret == -1)
 	{
 		print_error(info, "can't cd to ");
 		_eputs(info->argv[1]), _eputchar('\n');

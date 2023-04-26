@@ -25,7 +25,7 @@ int _erratoi(char *s)
 		else
 			return (-1);
 	}
-	return (result);
+	return (0);
 }
 
 /**
@@ -72,7 +72,7 @@ int print_d(int input, int fd)
 	current = _abs_;
 	for (x = 1000000000; x > 1; x /= 10)
 	{
-		if (_abs_ / i)
+		if (_abs_ / x)
 		{
 			__putchar('0' + current / x);
 			count++;
@@ -132,7 +132,7 @@ void remove_comments(char *buf)
 	int x;
 
 	for (x = 0; buf[x] != '\0'; x++)
-		if (buf[x] == '#' && (!i || buf[x - 1] == ' '))
+		if (buf[x] == '#' && (!x || buf[x - 1] == ' '))
 		{
 			buf[x] = '\0';
 			break;
